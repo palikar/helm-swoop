@@ -1163,19 +1163,7 @@ If LINUM is number, lines are separated by LINUM."
                             `(("Go to Line"
                                . (lambda (line)
                                    (switch-to-buffer ,buf)
-                                   (helm-swoop--goto-line
-                                    (when (string-match "^[0-9]+" line)
-                                      (string-to-number
-                                       (match-string 0 line))))
-                                   (when (re-search-forward
-                                          (mapconcat 'identity
-                                                     (split-string
-                                                      helm-pattern " ") "\\|")
-                                          nil t)
-                                     (funcall helm-swoop-flash-region-function
-                                              (match-beginning 0) (match-end 0))
-                                     (goto-char (match-beginning 0)))
-                                   (helm-swoop--recenter)))
+                                   (helm-swoop--goto-line-action line)))
                               ("Edit" . helm-multi-swoop--edit)))))
                   (setq preserve-position
                         (cons (cons buf (point)) preserve-position))
